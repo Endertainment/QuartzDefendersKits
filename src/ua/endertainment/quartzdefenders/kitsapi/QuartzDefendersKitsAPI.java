@@ -12,7 +12,7 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 		return main;
 	}
 	
-	
+	 
 	private Plugin quartzDefenders;
 	
 	@Override
@@ -23,7 +23,7 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 		
 		if(quartzDefenders == null) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "ERRORE WHILE LOADING PLUGIN. QUARTZDEFENDERS PLUGIN DOES NOT EXIST.");
-			Bukkit.getPluginManager( ).disablePlugin(main);
+			Bukkit.getPluginManager().disablePlugin(main);
 			return;
 		}
 		
