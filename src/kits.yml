@@ -1,0 +1,26 @@
+kits:
+  KIT_1:
+    name: 'Archer' 
+    color_name: '&4Archer'
+    unlock_type: PRICE, ACHIEVEMENT, GIFT
+    price: 100
+    unlock_lvl: 5
+    unlock_achievement: SOME_ACHIEVEMENT
+    description:
+      - 'Super awesome kit'
+      - 'Some another awesome description'
+    items:
+      item_1:
+        material: BOW
+        amount: 1
+        durability: 0
+        enchantments:
+          - DAMAGE_ALL:5
+          - PROTECTION:4
+      item_2:
+        material: BOW
+        amount: 1
+        durability: 0
+        enchantments:
+          - DAMAGE_ALL:5
+          - PROTECTION:4 

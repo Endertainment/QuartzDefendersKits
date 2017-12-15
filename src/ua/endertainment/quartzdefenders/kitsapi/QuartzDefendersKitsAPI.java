@@ -1,5 +1,8 @@
 package ua.endertainment.quartzdefenders.kitsapi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,9 +22,11 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	
 	private KitConfig kitConfig;
 	
+	private List<Kit> kits;
+	
 	@Override
 	public void onEnable() {
-		this.main = this;
+		main = this;
 		
 		this.quartzDefendersPlugin = Bukkit.getPluginManager().getPlugin("QuartzDefenders");
 		
@@ -35,8 +40,13 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 			return;
 		}
 		
+		QuartzDefenders.hook(main);
+		
+		this.kits = new ArrayList<>();
+		
 		this.kitConfig = new KitConfig(this);
 		
+		this.loadKitsFromConfig();
 		
 	}
 	
@@ -44,17 +54,33 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		
-		
-		this.main = null;
+		QuartzDefenders.unhook(main);
+		main = null;
 	}
 	
 	
+	public void loadKitsFromConfig() {
+		if(!getKitConfig().isConfigurationSection("kits")) {
+			getKitConfig().createSection("kits");
+			loadFail();
+			return;
+		}		
+		for(String kitID : getKitConfig().getConfigurationSection("kits").getKeys(false)) {
+			kits.add(new Kit(kitID));
+		}
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Kits loading success. Loaded " + kits.size() + " kits.");
+	}
+	
 	private void loadFail() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error while loading plugin. QuartzDefenders plugin does not exist.");
-		Bukkit.getPluginManager().disablePlugin(main);
+		this.getPluginLoader().disablePlugin(main);
 	}
 	
 	public FileConfiguration getKitConfig() {
 		return kitConfig.getKitsConfig();
+	}
+	
+	public List<Kit> getLoadedKits() {
+		return kits;
 	}
 }

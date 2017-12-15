@@ -12,19 +12,11 @@ public class KitConfig {
 	private FileConfiguration cfg;
 	
 	public KitConfig(QuartzDefendersKitsAPI plugin) {		
-		file = new File(plugin.getDataFolder() + File.separator, "kits.yml");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        cfg = YamlConfiguration.loadConfiguration(file);
-        if (!cfg.isConfigurationSection("Games")) {
-            cfg.createSection("Games");
-            saveKitsConfig();
-        }
+		 file = new File(plugin.getDataFolder() + File.separator, "kits.yml");
+	        if (!file.exists()) {
+	                plugin.saveResource("kits.yml", false);
+	        }
+	        cfg = YamlConfiguration.loadConfiguration(file);
 	}
 	
 	public void saveKitsConfig() {
