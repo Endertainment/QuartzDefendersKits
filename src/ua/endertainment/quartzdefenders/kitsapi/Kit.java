@@ -11,7 +11,7 @@ import ua.endertainment.quartzdefenders.utils.ItemUtil;
 public class Kit {
 
 	public enum KitUnlockType {
-		PRICE, ACHIEVEMENT, GIFT
+		PRICE, ACHIEVEMENT, GIFT, PERMISSION
 	}
 	
 	private String kitID;
