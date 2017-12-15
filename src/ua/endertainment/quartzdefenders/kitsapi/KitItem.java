@@ -24,7 +24,7 @@ public class KitItem {
 		
 		this.kitID = kitID;
 		this.itemID = itemID;
-		this.material = Material.valueOf(c.getString("kits." + kitID + ".items." + itemID + ".material", Material.QUARTZ.toString()));
+		this.material = Material.valueOf(c.getString("kits." + kitID + ".items." + itemID + ".material", "PRICE"));
 		this.amount = c.getInt("kits." + kitID + ".items." + itemID + ".amount", 1);
 		this.durability = (short) c.getInt("kits." + kitID + ".items." + itemID + ".durability", 1);
 		

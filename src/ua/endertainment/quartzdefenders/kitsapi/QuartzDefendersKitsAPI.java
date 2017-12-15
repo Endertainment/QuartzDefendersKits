@@ -48,6 +48,8 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 		
 		this.loadKitsFromConfig();
 		
+		this.registerKits();
+		
 	}
 	
 	
@@ -59,16 +61,26 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	}
 	
 	
-	public void loadKitsFromConfig() {
+	private void loadKitsFromConfig() {
 		if(!getKitConfig().isConfigurationSection("kits")) {
 			getKitConfig().createSection("kits");
 			loadFail();
 			return;
 		}		
 		for(String kitID : getKitConfig().getConfigurationSection("kits").getKeys(false)) {
-			kits.add(new Kit(kitID));
+			try {
+				kits.add(new Kit(kitID));
+			} catch(Exception e) {
+				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Kit " + kitID + " load failed.");
+			}
 		}
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Kits loading success. Loaded " + kits.size() + " kits.");
+		
+	}
+	
+	private void registerKits() {
+		for(Kit kit : kits)
+			QuartzDefenders.getInstance().getKitManager().registerKit(kit, main);
 	}
 	
 	private void loadFail() {

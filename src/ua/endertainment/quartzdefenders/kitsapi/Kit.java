@@ -1,14 +1,16 @@
 package ua.endertainment.quartzdefenders.kitsapi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import ua.endertainment.quartzdefenders.game.GamePlayer;
 import ua.endertainment.quartzdefenders.utils.ColorFormat;
 import ua.endertainment.quartzdefenders.utils.ItemUtil;
 
-public class Kit {
+public class Kit extends ua.endertainment.quartzdefenders.kits.Kit{
 
 	public enum KitUnlockType {
 		PRICE, ACHIEVEMENT, GIFT, PERMISSION
@@ -52,29 +54,56 @@ public class Kit {
 	public String getKitID() {
 		return kitID;
 	}
+	
+	@Override
 	public String getName() {
 		return name;
 	}
-	public String getColorName() {
+	
+	@Override
+	public String getDisplayName() {
 		return colorName;
 	}
+	
 	public KitUnlockType getUnlockType() {
 		return unlockType;
 	}
+	
+	@Override
 	public int getPrice() {
 		return price;
 	}
-	public int getUnlockLvl() {
-		return unlockLvl;
-	}
+		
 	public String getUnlockAchievemet() {
 		return unlockAchievemet;
 	}
+	
+	@Override
 	public List<String> getDescription() {
 		return description;
 	}
-	public ItemStack getItemToRepresent() {
+
+	@Override
+	public int getLevel() {
+		return unlockLvl;
+	}
+
+	@Override
+	public ItemStack getPreviewItem() {
 		return itemToRepresent;
+	}
+
+	@Override
+	public List<ItemStack> getItems() {
+		List<ItemStack> l = new ArrayList<>();
+		for(KitItem i : items) l.add(i.getItem());
+		return l;
+	}
+
+	@Override
+	public void apply(GamePlayer arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
