@@ -74,7 +74,8 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Kit " + kitID + " load failed.");
 			}
 		}
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Kits loading success. Loaded " + kits.size() + " kits.");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Kits loading finished. Loaded " + kits.size()
+					+ " of " + getKitConfig().getConfigurationSection("kits").getKeys(false).size() + " kits.");
 		
 	}
 	

@@ -7,14 +7,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import ua.endertainment.quartzdefenders.game.GamePlayer;
+import ua.endertainment.quartzdefenders.kits.KitUnlockType;
 import ua.endertainment.quartzdefenders.utils.ColorFormat;
 import ua.endertainment.quartzdefenders.utils.ItemUtil;
 
-public class Kit extends ua.endertainment.quartzdefenders.kits.Kit{
-
-	public enum KitUnlockType {
-		PRICE, ACHIEVEMENT, GIFT, PERMISSION
-	}
+public class Kit implements ua.endertainment.quartzdefenders.kits.Kit {
 	
 	private String kitID;
 	private String name;
@@ -23,6 +20,7 @@ public class Kit extends ua.endertainment.quartzdefenders.kits.Kit{
 	private int price;
 	private int unlockLvl;
 	private String unlockAchievemet;
+	private String unlockPermission;
 	private List<String> description;
 	private List<KitItem> items;
 	private ItemStack itemToRepresent;
@@ -34,7 +32,7 @@ public class Kit extends ua.endertainment.quartzdefenders.kits.Kit{
 		this.kitID = kitID;
 		this.name = cfg.getString("kits." + kitID + ".name", kitID + " name");
 		this.colorName = cfg.getString("kits." + kitID + ".color_name", kitID + " color_name");
-		this.unlockType = KitUnlockType.valueOf(cfg.getString("kits." + kitID + ".unlock_type", KitUnlockType.PRICE.toString()));
+		this.unlockType = KitUnlockType.valueOf(cfg.getString("kits." + kitID + ".unlock_type", "PRICE"));
 		this.price = cfg.getInt("kits." + kitID + ".price", 100);
 		this.unlockLvl = cfg.getInt("kits." + kitID + ".unlock_lvl", 10);
 		
@@ -73,11 +71,7 @@ public class Kit extends ua.endertainment.quartzdefenders.kits.Kit{
 	public int getPrice() {
 		return price;
 	}
-		
-	public String getUnlockAchievemet() {
-		return unlockAchievemet;
-	}
-	
+			
 	@Override
 	public List<String> getDescription() {
 		return description;
@@ -102,8 +96,19 @@ public class Kit extends ua.endertainment.quartzdefenders.kits.Kit{
 
 	@Override
 	public void apply(GamePlayer arg0) {
-		// TODO Auto-generated method stub
-		
+		for(KitItem i : items) {
+			arg0.getPlayer().getInventory().addItem(i.getItem());
+		}
+	}
+
+	@Override
+	public String getAchievemet() {
+		return unlockAchievemet;
+	}
+
+	@Override
+	public String getPermission() {
+		return unlockPermission;
 	}
 
 }
