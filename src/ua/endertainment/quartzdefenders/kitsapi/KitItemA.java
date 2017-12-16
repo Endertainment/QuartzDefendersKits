@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class KitItem {
+public class KitItemA implements ua.endertainment.quartzdefenders.kits.KitItem {
 
 	private String kitID;
 	private String itemID;
@@ -19,7 +19,7 @@ public class KitItem {
 	
 	private ItemStack item;
 	
-	public KitItem(String kitID, String itemID) {		
+	public KitItemA(String kitID, String itemID) {		
 		FileConfiguration c = QuartzDefendersKitsAPI.getInstance().getKitConfig();
 		
 		this.kitID = kitID;
@@ -43,10 +43,12 @@ public class KitItem {
 		item.addUnsafeEnchantments(enchantments);        		
 	}
 	
+	@Override
 	public String getKitID() {
 		return kitID;
 	}
 	
+	@Override
 	public String getItemID() {
 		return itemID;
 	}
@@ -67,6 +69,7 @@ public class KitItem {
 		return enchantments;
 	}
 	
+	@Override
 	public ItemStack getItem() {
 		return item;
 	}

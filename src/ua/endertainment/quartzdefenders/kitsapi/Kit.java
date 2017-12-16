@@ -1,12 +1,12 @@
 package ua.endertainment.quartzdefenders.kitsapi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import ua.endertainment.quartzdefenders.game.GamePlayer;
+import ua.endertainment.quartzdefenders.kits.KitItem;
 import ua.endertainment.quartzdefenders.kits.KitUnlockType;
 import ua.endertainment.quartzdefenders.utils.ColorFormat;
 import ua.endertainment.quartzdefenders.utils.ItemUtil;
@@ -40,7 +40,7 @@ public class Kit implements ua.endertainment.quartzdefenders.kits.Kit {
 		this.description = cfg.getStringList("kits." + kitID + ".description");
 		
 		for(String itemID : cfg.getConfigurationSection("kits." + kitID + ".items").getKeys(false)) {
-			items.add(new KitItem(kitID, itemID));
+			items.add(new KitItemA(kitID, itemID));
 	    }
 		
 		this.colorName = new ColorFormat(colorName).format();
@@ -88,10 +88,8 @@ public class Kit implements ua.endertainment.quartzdefenders.kits.Kit {
 	}
 
 	@Override
-	public List<ItemStack> getItems() {
-		List<ItemStack> l = new ArrayList<>();
-		for(KitItem i : items) l.add(i.getItem());
-		return l;
+	public List<KitItem> getItems() {
+		return items;
 	}
 
 	@Override
