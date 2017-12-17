@@ -2,25 +2,24 @@ kits:
   KIT_1:
     name: 'Archer' 
     color_name: '&4Archer'
-    unlock_type: PRICE, ACHIEVEMENT, GIFT
+    unlock_types: 
+      - LEVEL
+      - PRICE
     price: 100
     unlock_lvl: 5
     unlock_achievement: SOME_ACHIEVEMENT
+    unlock_permission: QuartzDefendersKits.unlockPermission.KIT_1
     description:
-      - 'Super awesome kit'
-      - 'Some another awesome description'
+      - 'Super awesome Archer kit'
+      - 'Bow x1, Arrow x10'
     items:
       item_1:
         material: BOW
         amount: 1
         durability: 0
         enchantments:
-          - DAMAGE_ALL:5
-          - PROTECTION:4
+          - ARROW_DAMAGE:1
       item_2:
-        material: BOW
-        amount: 1
+        material: ARROW
+        amount: 10
         durability: 0
-        enchantments:
-          - DAMAGE_ALL:5
-          - PROTECTION:4 
