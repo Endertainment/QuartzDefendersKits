@@ -1,25 +1,54 @@
-kits:
-  KIT_1:
-    name: 'Archer' 
-    color_name: '&4Archer'
-    unlock_types: 
+kits: #Default configuration section 
+  KIT_1: #Kit ID (Anyone string)
+    name: 'Archer' #Name of kit
+    color_name: '&4Archer' #Name of kit with color codes (Display name)
+    unlock_types: #Unlock types of kit (FREE, GIFT, ACHIEVEMENT, PERMISSION, LEVEL, PRICE). A 'PRICE' type must be the last one.
       - LEVEL
       - PRICE
-    price: 100
-    unlock_lvl: 5
-    unlock_achievement: SOME_ACHIEVEMENT
-    unlock_permission: QuartzDefendersKits.unlockPermission.KIT_1
-    description:
+    price: 100 #Price of kit (Coins from QuartzDefenders Stats)
+    unlock_lvl: 5 #Level needed to unlock the kit
+    unlock_achievement: SOME_ACHIEVEMENT #Achievement needed to unlock the kit (From QuartzDefenders Achievements)
+    unlock_permission: QuartzDefendersKits.unlockPermission.KIT_1 #Permission needed to unlock the kit
+    description: #Description of kit (Optionally) (Color codes support)
       - 'Super awesome Archer kit'
       - 'Bow x1, Arrow x10'
-    items:
-      item_1:
-        material: BOW
-        amount: 1
-        durability: 0
-        enchantments:
+      - ' '
+      - 'Price: 100 coins'
+      - 'Level needed: 5'
+    items: #Required configuration section for items
+      item_1: #Item ID (Anyone string)
+        material: BOW #Material of item (Bukkit Materials)
+        amount: 1 #Amount if item stack
+        durability: 0 #Durability of item stack
+        enchantments: #Enchantments for item (Optionally). ( ENCHANTMENT:LEVEL without 'spaces' )
           - ARROW_DAMAGE:1
-      item_2:
+      item_2: #Second item
         material: ARROW
         amount: 10
+        durability: 0
+  KIT_2:
+    name: 'SnowMan'
+    color_name: '&3SnowMan'
+    unlock_types:
+      - ACHIEVEMENT
+      - LEVEL
+      - PRICE
+    price: 400 
+    unlock_lvl: 10 
+    unlock_achievement: SOME_ACHIEVEMENTx2 
+    unlock_permission: QuartzDefendersKits.unlockPermission.KIT_2 
+    description:
+      - 'Snow balls x16, Pumpkin x1, Diamon Shovel x1'
+    items: 
+      item_1: 
+        material: SNOW_BALL
+        amount: 16
+        durability: 0 
+      item_2:
+        material: PUMPKIN
+        amount: 1
+        durability: 0
+      item_3
+        material: DIAMOND_SPADE
+        amount: 1
         durability: 0
