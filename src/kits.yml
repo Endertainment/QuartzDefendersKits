@@ -48,7 +48,7 @@ kits: #Default configuration section
         material: PUMPKIN
         amount: 1
         durability: 0
-      item_3
+      item_3:
         material: DIAMOND_SPADE
         amount: 1
         durability: 0

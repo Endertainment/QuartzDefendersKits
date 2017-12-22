@@ -22,7 +22,7 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	
 	private KitConfig kitConfig;
 	
-	private List<Kit> kits;
+	private List<KitA> kits;
 	
 	@Override
 	public void onEnable() {
@@ -55,8 +55,9 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		
-		QuartzDefenders.unhook(main);
+		if(quartzDefendersPlugin != null) {
+			QuartzDefenders.unhook(main);
+		}		
 		main = null;
 	}
 	
@@ -69,7 +70,7 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 		}		
 		for(String kitID : getKitConfig().getConfigurationSection("kits").getKeys(false)) {
 			try {
-				kits.add(new Kit(kitID));
+				kits.add(new KitA(kitID));
 			} catch(Exception e) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Kit " + kitID + " load failed.");
 			}
@@ -80,7 +81,7 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	}
 	
 	private void registerKits() {
-		for(Kit kit : kits)
+		for(KitA kit : kits)
 			QuartzDefenders.getInstance().getKitManager().registerKit(kit, main);
 	}
 	
@@ -93,7 +94,7 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 		return kitConfig.getKitsConfig();
 	}
 	
-	public List<Kit> getLoadedKits() {
+	public List<KitA> getLoadedKits() {
 		return kits;
 	}
 }

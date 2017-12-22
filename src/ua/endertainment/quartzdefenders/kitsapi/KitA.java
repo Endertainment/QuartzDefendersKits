@@ -7,12 +7,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import ua.endertainment.quartzdefenders.game.GamePlayer;
+import ua.endertainment.quartzdefenders.kits.Kit;
 import ua.endertainment.quartzdefenders.kits.KitItem;
 import ua.endertainment.quartzdefenders.kits.KitUnlockType;
 import ua.endertainment.quartzdefenders.utils.ColorFormat;
 import ua.endertainment.quartzdefenders.utils.ItemUtil;
 
-public class Kit implements ua.endertainment.quartzdefenders.kits.Kit {
+public class KitA implements Kit {
 	
 	private String kitID;
 	private String name;
@@ -27,9 +28,10 @@ public class Kit implements ua.endertainment.quartzdefenders.kits.Kit {
 	private ItemStack itemToRepresent;
 	
 	
-	public Kit(String kitID) {
+	public KitA(String kitID) {
 		FileConfiguration cfg = QuartzDefendersKitsAPI.getInstance().getKitConfig();
 				
+		this.items = new ArrayList<>();
 		this.kitID = kitID;
 		this.name = cfg.getString("kits." + kitID + ".name", kitID + " name");
 		this.colorName = cfg.getString("kits." + kitID + ".color_name", kitID + " color_name");

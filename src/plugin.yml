@@ -1,5 +1,5 @@
 name: QuartzDefendersKits
 main: ua.endertainment.quartzdefenders.kitsapi.QuartzDefendersKitsAPI
-varsion: 1.0
+version: 1.0
 author: _Endertainment_
-depend: [QuartzDefenders]
+soft-depend: [QuartzDefenders]
