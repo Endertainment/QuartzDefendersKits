@@ -7,13 +7,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import ua.endertainment.quartzdefenders.game.GamePlayer;
-import ua.endertainment.quartzdefenders.kits.Kit;
 import ua.endertainment.quartzdefenders.kits.KitItem;
 import ua.endertainment.quartzdefenders.kits.KitUnlockType;
 import ua.endertainment.quartzdefenders.utils.ColorFormat;
 import ua.endertainment.quartzdefenders.utils.ItemUtil;
 
-public class KitA implements Kit {
+public class KitA implements ua.endertainment.quartzdefenders.kits.Kit {
 	
 	private String kitID;
 	private String name;

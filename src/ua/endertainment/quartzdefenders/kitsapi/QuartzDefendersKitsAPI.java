@@ -1,15 +1,10 @@
 package ua.endertainment.quartzdefenders.kitsapi;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import ua.endertainment.quartzdefenders.QuartzDefenders;
 
 public class QuartzDefendersKitsAPI extends JavaPlugin {
 
@@ -22,8 +17,8 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 	
 	private KitConfig kitConfig;
 	
-	private List<KitA> kits;
-	
+	Manager mng;
+		
 	@Override
 	public void onEnable() {
 		main = this;
@@ -35,57 +30,28 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 			return;
 		}
 		
-		if(!(quartzDefendersPlugin instanceof QuartzDefenders)) {
+		if(!(quartzDefendersPlugin instanceof ua.endertainment.quartzdefenders.QuartzDefenders)) {
 			loadFail();
 			return;
 		}
 		
-		QuartzDefenders.hook(main);
+		ua.endertainment.quartzdefenders.QuartzDefenders.hook(main);		
 		
-		this.kits = new ArrayList<>();
+		this.kitConfig = new KitConfig(this);		
 		
-		this.kitConfig = new KitConfig(this);
-		
-		this.loadKitsFromConfig();
-		
-		this.registerKits();
-		
+		this.mng = new Manager(this);
 	}
 	
 	
 	@Override
 	public void onDisable() {
 		if(quartzDefendersPlugin != null) {
-			QuartzDefenders.unhook(main);
+			ua.endertainment.quartzdefenders.QuartzDefenders.unhook(main);
 		}		
 		main = null;
 	}
-	
-	
-	private void loadKitsFromConfig() {
-		if(!getKitConfig().isConfigurationSection("kits")) {
-			getKitConfig().createSection("kits");
-			loadFail();
-			return;
-		}		
-		for(String kitID : getKitConfig().getConfigurationSection("kits").getKeys(false)) {
-			try {
-				kits.add(new KitA(kitID));
-			} catch(Exception e) {
-				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Kit " + kitID + " load failed.");
-			}
-		}
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Kits loading finished. Loaded " + kits.size()
-					+ " of " + getKitConfig().getConfigurationSection("kits").getKeys(false).size() + " kits.");
 		
-	}
-	
-	private void registerKits() {
-		for(KitA kit : kits)
-			QuartzDefenders.getInstance().getKitManager().registerKit(kit, main);
-	}
-	
-	private void loadFail() {
+	void loadFail() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error while loading plugin. QuartzDefenders plugin does not exist.");
 		this.getPluginLoader().disablePlugin(main);
 	}
@@ -94,7 +60,6 @@ public class QuartzDefendersKitsAPI extends JavaPlugin {
 		return kitConfig.getKitsConfig();
 	}
 	
-	public List<KitA> getLoadedKits() {
-		return kits;
-	}
+	
+	
 }
